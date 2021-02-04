@@ -1,10 +1,66 @@
-<mvc:XMLView xmlns:mvc="sap.ui.core.mvc"
+<mvc:XMLView xmlns:f="sap.f"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m" displayBlock="true">
   <Shell>
-    <App id="app">
-      <Page id="page" title="{i18n>title}">
-        <content></content>
+    <NavContainer id="app">
+      <f:DynamicPage>
+        <f:title>
+          <f:DynamicPageTitle >
+            <f:heading>
+              <Title text="{i18n>title}"/>
+            </f:heading>
+          </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+          <Wizard >
+            <WizardStep id="userInfo" title="{i18n>UserInfo}" icon="sap-icon://cart" nextStep="personalInfo">
+              <MessageStrip text="Fill all fields"/>
+              <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
+                <Label text="{i18n>UserName}"/>
+                <Input/>
+                <Label text="{i18n>UserSurname}"/>
+                <Input/>
+                <Label text="{i18n>UserAddress}"/>
+                <Input/>
+                <Label text="{i18n>UserCompanyName}"/>
+                <Input/>
+                <Label text="{i18n>UserWorkExp}"/>
+                <Input type="Number"/>
+              </form:SimpleForm>
+            </WizardStep>
+            <WizardStep id="personalInfo" title="{i18n>PersonalInfo}" icon="sap-icon://manager-insight" nextStep="backAccountInfo">
+              <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
+                <Label text="{i18n>UserPassportId}"/>
+                <Input/>
+                <Label text="{i18n>PassportReceivingDate}"/>
+                <Input/>
+                <Label text="{i18n>PassportExpirationDate}"/>
+                <Input/>
+                <Label text="{i18n>PlaceOfIssue}"/>
+                <Input/>
+              </form:SimpleForm>
+            </WizardStep>
+            <WizardStep id="bankAccountInfo" title="{i18n>BankAccountInfo}">
+              <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
+                <Label text="{i18n>BankAccountLogin}"/>
+                <Input enabled="false"/>
+                <Label text="{i18n>BankAccountNewPW}"/>
+                <Input type="Password"/>
+                <Label text="{i18n>BankAccountRepeatPW}"/>
+                <Input type="Password"/>
+              </form:SimpleForm>
+            </WizardStep>
+          </Wizard>
+        </f:content>
+      </f:DynamicPage>
+      <Page id="reviewPage">
+        <form:SimpleForm >
+          <List >
+            <StandardListItem title="foo"/>
+          </List>
+        </form:SimpleForm>
       </Page>
-    </App>
+    </NavContainer>
   </Shell>
 </mvc:XMLView>
