@@ -1,0 +1,10 @@
+<mvc:XMLView xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m" displayBlock="true">
+  <Shell>
+    <App id="app">
+      <Page id="page" title="{i18n>title}">
+        <content></content>
+      </Page>
+    </App>
+  </Shell>
+</mvc:XMLView>
