@@ -1,0 +1,14 @@
+{
+  "Name": null,
+  "Surname": null,
+  "Address": null,
+  "CompanyName": null,
+  "WorkExperience": null,
+  "PassportId": null,
+  "ReceivingDate": null,
+  "ExpirationDate": null,
+  "PlaceIssue": null,
+  "Login": null,
+  "NewPassword": null,
+  "RepeatPassword": null
+}

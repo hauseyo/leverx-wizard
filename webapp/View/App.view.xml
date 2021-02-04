@@ -1,10 +1,10 @@
 <mvc:XMLView xmlns:f="sap.f"
   xmlns:form="sap.ui.layout.form"
   xmlns:mvc="sap.ui.core.mvc"
-  xmlns="sap.m" displayBlock="true">
+  xmlns="sap.m" displayBlock="true" controllerName="wizard.controller.App">
   <Shell>
     <NavContainer id="app">
-      <f:DynamicPage>
+      <f:DynamicPage showFooter="true">
         <f:title>
           <f:DynamicPageTitle >
             <f:heading>
@@ -13,52 +13,87 @@
           </f:DynamicPageTitle>
         </f:title>
         <f:content>
-          <Wizard >
+          <Wizard id="bankAccountCreation" complete="onComplete">
             <WizardStep id="userInfo" title="{i18n>UserInfo}" icon="sap-icon://cart" nextStep="personalInfo">
               <MessageStrip text="Fill all fields"/>
               <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
                 <Label text="{i18n>UserName}"/>
-                <Input/>
+                <Input value="{path: '/Name'}"/>
                 <Label text="{i18n>UserSurname}"/>
-                <Input/>
+                <Input value="{path: '/Surname'}"/>
                 <Label text="{i18n>UserAddress}"/>
-                <Input/>
+                <Input value="{path: '/Address'}"/>
                 <Label text="{i18n>UserCompanyName}"/>
-                <Input/>
+                <Input value="{path: '/CompanyName'}"/>
                 <Label text="{i18n>UserWorkExp}"/>
-                <Input type="Number"/>
+                <Input type="Number" value="{path: '/WorkExperience'}"/>
               </form:SimpleForm>
             </WizardStep>
             <WizardStep id="personalInfo" title="{i18n>PersonalInfo}" icon="sap-icon://manager-insight" nextStep="backAccountInfo">
               <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
                 <Label text="{i18n>UserPassportId}"/>
-                <Input/>
+                <Input value="{path: '/PasswordId'}"/>
                 <Label text="{i18n>PassportReceivingDate}"/>
-                <Input/>
+                <DatePicker value="{path: '/ReceivingDate'}"/>
                 <Label text="{i18n>PassportExpirationDate}"/>
-                <Input/>
+                <DatePicker value="{path: '/ExpirationDate'}"/>
                 <Label text="{i18n>PlaceOfIssue}"/>
-                <Input/>
+                <Input value="{path: '/PlaceIssue'}"/>
               </form:SimpleForm>
             </WizardStep>
             <WizardStep id="bankAccountInfo" title="{i18n>BankAccountInfo}">
               <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
                 <Label text="{i18n>BankAccountLogin}"/>
-                <Input enabled="false"/>
+                <Input enabled="false" value="{path: '/Login'}"/>
                 <Label text="{i18n>BankAccountNewPW}"/>
-                <Input type="Password"/>
+                <Input type="Password" value="{path: '/NewPassword'}"/>
                 <Label text="{i18n>BankAccountRepeatPW}"/>
-                <Input type="Password"/>
+                <Input type="Password" value="{path: '/RepeatPassword'}"/>
               </form:SimpleForm>
             </WizardStep>
           </Wizard>
         </f:content>
+        <f:footer>
+          <OverflowToolbar>
+            <ToolbarSpacer/>
+            <Button text="{i18n>PrevStep}"/>
+            <Button type="Emphasized" text="{i18n>NextStep}"/>
+            <Button type="Transparent" text="{i18n>Cancel}"/>
+          </OverflowToolbar>
+        </f:footer>
       </f:DynamicPage>
-      <Page id="reviewPage">
-        <form:SimpleForm >
-          <List >
-            <StandardListItem title="foo"/>
-          </List>
+      <Page id="reviewPage" title="{i18n>ReviewPageTit}">
+        <form:SimpleForm title="{i18n>UserInfo}">
+          <Label text="{i18n>UserName}"/>
+          <Text text="{/Name}"/>
+          <Label text="{i18n>UserSurname}"/>
+          <Text text="{/Surname}"/>
+          <Label text="{i18n>UserAddress}"/>
+          <Text text="{/Address}"/>
+          <Label text="{i18n>UserWorkExp}"/>
+          <Text text="{/WorkExperience}"/>
+
+          <Link text="{i18n>Edit}" press="onEditFirstStep"/>
+        </form:SimpleForm>
+
+        <form:SimpleForm title="{i18n>PersonalInfo}">
+          <Label text="{i18n>UserPassportId}"/>
+          <Text text="{/PassportId}"/>
+          <Label text="{i18n>PassportReceivingDate}"/>
+          <Text text="{/ReceivingDate}"/>
+          <Label text="{i18n>UserWorkExp}"/>
+          <Text text="{/ExpirationDate}"/>
+          <Label text="{i18n>PlaceOfIssue}"/>
+          <Text text="{/PlaceIssue}"/>
+
+          <Link text="{i18n>Edit}"/>
+        </form:SimpleForm>
+
+        <form:SimpleForm title="{i18n>BankAccountInfo}">
+          <Label text="{i18n>BankAccountLogin}"/>
+          <Text text="{/PassportId}"/>
+
+          <Link text="{i18n>ChangePW}"/>
         </form:SimpleForm>
       </Page>
     </NavContainer>
