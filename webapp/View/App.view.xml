@@ -1,10 +1,11 @@
-<mvc:XMLView xmlns:f="sap.f"
+<mvc:XMLView xmlns:core="sap.ui.core"
+  xmlns:f="sap.f"
   xmlns:form="sap.ui.layout.form"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m" displayBlock="true" controllerName="wizard.controller.App">
   <Shell>
     <NavContainer id="app">
-      <f:DynamicPage showFooter="true">
+      <f:DynamicPage id="wizardPage" showFooter="true">
         <f:title>
           <f:DynamicPageTitle >
             <f:heading>
@@ -14,7 +15,7 @@
         </f:title>
         <f:content>
           <Wizard id="bankAccountCreation" complete="onComplete">
-            <WizardStep id="userInfo" title="{i18n>UserInfo}" icon="sap-icon://cart" nextStep="personalInfo">
+            <WizardStep id="userInfo" title="{i18n>UserInfo}" icon="sap-icon://cart" nextStep="personalInfo" complete="onCompleteStep">
               <MessageStrip text="Fill all fields"/>
               <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
                 <Label text="{i18n>UserName}"/>
@@ -29,7 +30,7 @@
                 <Input type="Number" value="{path: '/WorkExperience'}"/>
               </form:SimpleForm>
             </WizardStep>
-            <WizardStep id="personalInfo" title="{i18n>PersonalInfo}" icon="sap-icon://manager-insight" nextStep="backAccountInfo">
+            <WizardStep id="personalInfo" title="{i18n>PersonalInfo}" icon="sap-icon://manager-insight" nextStep="backAccountInfo" complete="onCompleteStep">
               <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
                 <Label text="{i18n>UserPassportId}"/>
                 <Input value="{path: '/PasswordId'}"/>
@@ -56,8 +57,8 @@
         <f:footer>
           <OverflowToolbar>
             <ToolbarSpacer/>
-            <Button text="{i18n>PrevStep}"/>
-            <Button type="Emphasized" text="{i18n>NextStep}"/>
+            <Button text="{i18n>PrevStep}" enabled="{= !!${states>/currentStep}}" press="onPrevStep"/>
+            <Button type="Emphasized" text="{i18n>NextStep}" enabled="{states>/isStepLast}" press="onNextStep"/>
             <Button type="Transparent" text="{i18n>Cancel}"/>
           </OverflowToolbar>
         </f:footer>
@@ -73,7 +74,11 @@
           <Label text="{i18n>UserWorkExp}"/>
           <Text text="{/WorkExperience}"/>
 
-          <Link text="{i18n>Edit}" press="onEditFirstStep"/>
+          <Link text="{i18n>Edit}" press="onEditStep">
+            <customData>
+              <core:CustomData key="0"/>
+            </customData>
+          </Link>
         </form:SimpleForm>
 
         <form:SimpleForm title="{i18n>PersonalInfo}">
@@ -86,14 +91,22 @@
           <Label text="{i18n>PlaceOfIssue}"/>
           <Text text="{/PlaceIssue}"/>
 
-          <Link text="{i18n>Edit}"/>
+          <Link text="{i18n>Edit}" press="onEditStep">
+            <customData>
+              <core:CustomData key="1"/>
+            </customData>
+          </Link>
         </form:SimpleForm>
 
         <form:SimpleForm title="{i18n>BankAccountInfo}">
           <Label text="{i18n>BankAccountLogin}"/>
           <Text text="{/PassportId}"/>
 
-          <Link text="{i18n>ChangePW}"/>
+          <Link text="{i18n>ChangePW}" press="onEditStep">
+            <customData>
+              <core:CustomData key="2"/>
+            </customData>
+          </Link>
         </form:SimpleForm>
       </Page>
     </NavContainer>

@@ -60,6 +60,10 @@
       "": {
         "type": "sap.ui.model.json.JSONModel",
         "uri": "./Model/Form.json"
+      },
+      "states": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "./Model/States.json"
       }
     },
     "resources": {
