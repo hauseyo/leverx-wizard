@@ -1,28 +1,40 @@
-sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
-	"use strict";
+sap.ui.define(
+	["sap/ui/core/mvc/Controller", "sap/ui/core/Fragment"],
+	function (Controller, Fragment) {
+		"use strict";
 
-	return Controller.extend("wizard.Controller.BaseController", {
-		getModel: function (sModelName) {
-			return this.getView().getModel(sModelName || "");
-		},
+		return Controller.extend("wizard.Controller.BaseController", {
+			getModel: function () {
+				return this.getView().getModel();
+			},
 
-		getProperty: function (sPath) {
-			return this.getModel().getProperty("/" + sPath);
-		},
+			getProperty: function (sPath) {
+				return this.getModel().getProperty("/" + sPath);
+			},
 
-		setProperty: function (oData) {
-			this.getModel(oData.model || "").setProperty(
-				"/" + oData.path,
-				oData.value
-			);
-		},
+			setProperty: function (sPath, vValue) {
+				this.getModel().setProperty("/" + sPath, vValue);
+			},
 
-		getState: function (sPath) {
-			return this.getModel("states").getProperty("/" + sPath);
-		},
+			getState: function (sPath) {
+				return this.getView()
+					.getModel("states")
+					.getProperty("/" + sPath);
+			},
 
-		setState: function (sPath, vValue) {
-			this.getModel("states").setProperty("/" + sPath, vValue);
-		},
-	});
-});
+			setState: function (sPath, vValue) {
+				this.getView()
+					.getModel("states")
+					.setProperty("/" + sPath, vValue);
+			},
+
+			loadFragment: function (sFragmentName) {
+				return Fragment.load({
+					id: this.getView().getId(),
+					name: "wizard.fragments." + sFragmentName,
+					controller: this,
+				});
+			},
+		});
+	}
+);

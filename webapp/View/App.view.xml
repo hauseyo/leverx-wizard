@@ -2,7 +2,8 @@
   xmlns:f="sap.f"
   xmlns:form="sap.ui.layout.form"
   xmlns:mvc="sap.ui.core.mvc"
-  xmlns="sap.m" displayBlock="true" controllerName="wizard.controller.App">
+  xmlns="sap.m" displayBlock="true" controllerName="wizard.controller.App"
+  xmlns:bank="wizard.controls">
   <Shell>
     <NavContainer id="app">
       <f:DynamicPage id="wizardPage" showFooter="true">
@@ -17,7 +18,7 @@
           <Wizard id="bankAccountCreation" complete="onComplete">
             <WizardStep id="userInfo" title="{i18n>UserInfo}" icon="sap-icon://cart" nextStep="personalInfo" complete="onCompleteStep">
               <MessageStrip text="Fill all fields"/>
-              <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
+              <form:SimpleForm layout="ResponsiveGridLayout" labelSpanL="2" editable="true">
                 <Label text="{i18n>UserName}"/>
                 <Input value="{path: '/Name'}"/>
                 <Label text="{i18n>UserSurname}"/>
@@ -31,9 +32,9 @@
               </form:SimpleForm>
             </WizardStep>
             <WizardStep id="personalInfo" title="{i18n>PersonalInfo}" icon="sap-icon://manager-insight" nextStep="backAccountInfo" complete="onCompleteStep">
-              <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
+              <form:SimpleForm layout="ResponsiveGridLayout" labelSpanL="2" editable="true">
                 <Label text="{i18n>UserPassportId}"/>
-                <Input value="{path: '/PasswordId'}"/>
+                <Input value="{path: '/PassportId'}"/>
                 <Label text="{i18n>PassportReceivingDate}"/>
                 <DatePicker value="{path: '/ReceivingDate'}"/>
                 <Label text="{i18n>PassportExpirationDate}"/>
@@ -43,9 +44,12 @@
               </form:SimpleForm>
             </WizardStep>
             <WizardStep id="bankAccountInfo" title="{i18n>BankAccountInfo}">
-              <form:SimpleForm layout="ColumnLayout" labelSpanL="2" editable="true">
+              <form:SimpleForm layout="ResponsiveGridLayout" labelSpanL="2" editable="true">
                 <Label text="{i18n>BankAccountLogin}"/>
                 <Input enabled="false" value="{path: '/Login'}"/>
+                <Label text="{i18n>CreditCardNum}"/>
+                <!-- <Input value="{path: '/CardNumber'}"/> -->
+                <bank:CreditCardField value="{/CardNumber}" />
                 <Label text="{i18n>BankAccountNewPW}"/>
                 <Input type="Password" value="{path: '/NewPassword'}"/>
                 <Label text="{i18n>BankAccountRepeatPW}"/>
@@ -57,9 +61,9 @@
         <f:footer>
           <OverflowToolbar>
             <ToolbarSpacer/>
-            <Button text="{i18n>PrevStep}" enabled="{= !!${states>/currentStep}}" press="onPrevStep"/>
+            <Button text="{i18n>PrevStep}" enabled="{= ${states>/currentStep} > 1}" press="onPrevStep"/>
             <Button type="Emphasized" text="{i18n>NextStep}" enabled="{states>/isStepLast}" press="onNextStep"/>
-            <Button type="Transparent" text="{i18n>Cancel}"/>
+            <Button type="Transparent" text="{i18n>Cancel}" press="onCancel"/>
           </OverflowToolbar>
         </f:footer>
       </f:DynamicPage>
@@ -101,13 +105,24 @@
         <form:SimpleForm title="{i18n>BankAccountInfo}">
           <Label text="{i18n>BankAccountLogin}"/>
           <Text text="{/PassportId}"/>
-
+          <Label text="{i18n>CreditCardNum}"/>
+          <Text text="{
+            path: '/CardNumber',
+            formatter: '.formatters.hideCardNumber'
+            }"/>
           <Link text="{i18n>ChangePW}" press="onEditStep">
             <customData>
               <core:CustomData key="2"/>
             </customData>
           </Link>
         </form:SimpleForm>
+        <footer>
+          <OverflowToolbar>
+            <ToolbarSpacer/>
+            <Button type="Emphasized" text="{i18n>CreateCredit}"/>
+            <Button type="Transparent" text="{i18n>CancelCreation}"/>
+          </OverflowToolbar>
+        </footer>
       </Page>
     </NavContainer>
   </Shell>

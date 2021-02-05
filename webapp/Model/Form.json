@@ -9,6 +9,7 @@
   "ExpirationDate": null,
   "PlaceIssue": null,
   "Login": null,
+  "CardNumber": null,
   "NewPassword": null,
   "RepeatPassword": null
 }

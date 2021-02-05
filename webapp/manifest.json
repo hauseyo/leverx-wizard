@@ -46,6 +46,7 @@
         "sap.m": {}
       }
     },
+    "handleValidation": true,
     "contentDensities": {
       "compact": true,
       "cozy": true
