@@ -108,7 +108,7 @@
           <Label text="{i18n>CreditCardNum}"/>
           <Text text="{
             path: '/CardNumber',
-            formatter: '.formatters.hideCardNumber'
+            formatter: '.formatters.maskCreditCardNumber'
             }"/>
           <Link text="{i18n>ChangePW}" press="onEditStep">
             <customData>

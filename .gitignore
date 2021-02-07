@@ -1,1 +1,9 @@
 node_modules
+webapp/**/*.js
+webapp/**/*.js.map
+webapp/*.js
+webapp/*.js.map
+webapp/Controller/*.js
+webapp/Controller/*.js.map
+webapp/utils/*.js
+webapp/utils/formatters.js

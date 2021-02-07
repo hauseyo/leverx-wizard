@@ -1,22 +1,15 @@
 sap.ui.define([], function () {
-	"use strict";
+  "use strict";
+  return class Formatter {
+    public maskCreditCardNumber(cardNumber: string) {
+      if (cardNumber) {
+        var sNumbersOnly = cardNumber.replace(/\s/g, ""),
+          sMaskedNumber = sNumbersOnly.replace(/[0-9](?=([0-9]{4}))/g, "*");
 
-	return {
-		/**
-		 * Method to mask credit card number except last 4 digits.
-		 * @param  {string} sCardNumber - Credit card number.
-		 * @return {string} Returns masked credit card number except last 4 digits.
-		 * @public
-		 */
-		hideCardNumber: function (sCardNumber:string):string {
-			if (!sCardNumber) {
-				return "";
-			}
+        return sMaskedNumber;
+      }
 
-			var sNumbersOnly = sCardNumber.replace(/\s/g, ""),
-				sMaskedNumber = sNumbersOnly.replace(/[0-9](?=([0-9]{4}))/g, "*");
-
-			return sMaskedNumber;
-		},
-	};
+      return "";
+    }
+  };
 });
