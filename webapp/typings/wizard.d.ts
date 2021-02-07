@@ -20,7 +20,7 @@ declare namespace wizard {
 
     _wizardPage: sap.f.DynamicPage;
 
-    oDiscardPopover: sap.m.Popover;
+    _discardPopover: sap.m.Popover;
   }
 
   enum CARD_TYPES {

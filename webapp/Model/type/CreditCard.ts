@@ -19,15 +19,15 @@ sap.ui.define(
       formatValue(value: string): string {
         if (!value) return "";
 
-        var aNumbers = [value],
-          sMatch = (aNumbers && aNumbers[0]) || "",
-          aParts = [];
+        var numbers = [value],
+          matchedString = (numbers && numbers[0]) || "",
+          parts = [];
 
-        for (var i = 0; i < sMatch.length; i += 4) {
-          aParts.push(sMatch.substring(i, i + 4));
+        for (var i = 0; i < matchedString.length; i += 4) {
+          parts.push(matchedString.substring(i, i + 4));
         }
 
-        return aParts.length ? aParts.join(" ") : value;
+        return parts.length ? parts.join(" ") : value;
       }
       /**
        * Method to parse given value.
@@ -37,14 +37,14 @@ sap.ui.define(
        * @private
        */
       parseValue(value: string): string {
-        var sNumbersOnly = value.replace(/\s/g, ""),
-          bIsNumber = Number.isInteger(+sNumbersOnly);
+        var numbersOnly = value.replace(/\s/g, ""),
+          bIsNumber = Number.isInteger(+numbersOnly);
 
         if (!bIsNumber) {
           throw new ValidateException("Please enter numbers");
         }
 
-        return sNumbersOnly;
+        return numbersOnly;
       }
       /**
        * Method to validate credit card number.

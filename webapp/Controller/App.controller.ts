@@ -22,9 +22,9 @@ sap.ui.define(
       }
 
       public onCompleteStep(): void {
-        var nCurrentStep = this.getState("currentStep");
+        var currentStep: number = this.getState("currentStep");
 
-        this.changeCurrentStepNumber(nCurrentStep + 1);
+        this.changeCurrentStepNumber(currentStep + 1);
         this.checkLastStep();
       }
 
@@ -33,50 +33,50 @@ sap.ui.define(
       }
 
       public onPrevStep(): void {
-        var nPrevStep = this.getState("currentStep") - 1;
+        var prevStep: number = this.getState("currentStep") - 1;
 
-        this.changeCurrentStepNumber(nPrevStep);
+        this.changeCurrentStepNumber(prevStep);
         this.checkLastStep();
         this._wizardContainer.previousStep();
       }
 
-      public onEditStep(oEvent: sap.ui.base.Event): void {
-        var nStep = oEvent.getSource().getCustomData()[0].getKey();
+      public onEditStep(event: sap.ui.base.Event): void {
+        var stepNumber: number = event.getSource().getCustomData()[0].getKey();
 
-        this.navigateToWizardPage(nStep);
+        this.navigateToWizardPage(stepNumber);
       }
 
-      public onCancel(oEvent: sap.ui.base.Event): void {
-        this.loadDiscardPopover(oEvent.getSource());
+      public onCancel(event: sap.ui.base.Event): void {
+        this.loadDiscardPopover(event.getSource());
       }
 
       private generateBankLogin(): void {
-        var sName = this.getProperty("Name"),
-          sLogin = sName + (0 | Math.random());
+        var name: string = this.getProperty("Name"),
+          login: string = name + (0 | Math.random());
 
-        this.setProperty("Login", sLogin);
+        this.setProperty("Login", login);
       }
 
-      private loadDiscardPopover(oSource: sap.m.Button): void {
-        if (!this.oDiscardPopover) {
+      private loadDiscardPopover(source: sap.m.Button): void {
+        if (!this._discardPopover) {
           this.loadFragment("DiscardConfirmation").then(
-            function (oPopover: sap.m.Popover) {
-              this.oDiscardPopover = oPopover;
-              this.getView().addDependent(oPopover);
-              oPopover.openBy(oSource, true);
+            function (popover: sap.m.Popover) {
+              this._discardPopover = popover;
+              this.getView().addDependent(popover);
+              popover.openBy(source, true);
             }.bind(this)
           );
         } else {
-          this.oDiscardPopover.openBy(oSource, true);
+          this._discardPopover.openBy(source, true);
         }
       }
 
       private checkLastStep(): void {
-        var nSteps = this._wizardContainer.getSteps().length,
-          nCurrentStep = this.getState("currentStep"),
-          bIsLastStep = nSteps === nCurrentStep;
+        var totalSteps: number = this._wizardContainer.getSteps().length,
+          currentStep: number = this.getState("currentStep"),
+          isLastStep: boolean = totalSteps === currentStep;
 
-        this.setState("isStepLast", !bIsLastStep);
+        this.setState("isStepLast", !isLastStep);
       }
 
       private changeCurrentStepNumber(stepNumber: number): void {
@@ -91,9 +91,9 @@ sap.ui.define(
       }
 
       private navigateToWizardStep(stepNumber: number) {
-        var oStep = this._wizardContainer.getSteps()[stepNumber];
+        var wizardStep = this._wizardContainer.getSteps()[stepNumber];
 
-        this._wizardContainer.goToStep(oStep, true);
+        this._wizardContainer.goToStep(wizardStep, true);
 
         this._navContainer.detachAfterNavigate(this.navigateToWizardStep);
       }
