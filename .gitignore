@@ -3,4 +3,6 @@ webapp/**/*.js
 webapp/**/*.js.map
 webapp/*.js
 webapp/*.js.map
+.vscode
+!Component-preload.js
 
