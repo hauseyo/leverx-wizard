@@ -3,10 +3,10 @@ sap.ui.define([], function () {
   return class Formatter {
     public maskCreditCardNumber(cardNumber: string) {
       if (cardNumber) {
-        var sNumbersOnly = cardNumber.replace(/\s/g, ""),
-          sMaskedNumber = sNumbersOnly.replace(/[0-9](?=([0-9]{4}))/g, "*");
+        const numbersOnly = cardNumber.replace(/\s/g, ""),
+          maskedNumber = numbersOnly.replace(/[0-9](?=([0-9]{4}))/g, "*");
 
-        return sMaskedNumber;
+        return maskedNumber;
       }
 
       return "";

@@ -4,7 +4,7 @@ declare namespace wizard {
 
     public getProperty(path: string): any;
 
-    public setProperty(path: string, value: any);
+    public setProperty(path: string, value: any): void | never;
 
     public getState(path: string): any;
 
@@ -21,6 +21,10 @@ declare namespace wizard {
     _wizardPage: sap.f.DynamicPage;
 
     _discardPopover: sap.m.Popover;
+  }
+
+  export class Formatters {
+    public maskCreditCardNumber(cardNumber: string): string;
   }
 
   enum CARD_TYPES {

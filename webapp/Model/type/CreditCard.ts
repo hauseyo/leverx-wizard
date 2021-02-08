@@ -38,9 +38,9 @@ sap.ui.define(
        */
       parseValue(value: string): string {
         var numbersOnly = value.replace(/\s/g, ""),
-          bIsNumber = Number.isInteger(+numbersOnly);
+          isNumber = Number.isInteger(+numbersOnly);
 
-        if (!bIsNumber) {
+        if (!isNumber) {
           throw new ValidateException("Please enter numbers");
         }
 

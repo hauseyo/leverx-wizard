@@ -16,7 +16,7 @@ sap.ui.define(
         BaseController.prototype.getMetadata =
           controllerClass.prototype.getMetadata;
 
-        super("wizard.controller.BaseController");
+        super("wizard.Controller.BaseController");
       }
 
       public getModel(): sap.ui.model.json.JSONModel {
@@ -37,10 +37,12 @@ sap.ui.define(
           .getProperty("/" + path);
       }
 
-      public setState(path: string, value: any) {
-        this.getView()
-          .getModel("states")
-          .setProperty("/" + path, value);
+      public setState(path: string, value: any): void {
+        const stateModel: sap.ui.model.json.JSONModel = this.getView().getModel(
+          "states"
+        );
+
+        stateModel.setProperty("/" + path, value);
       }
 
       public loadFragment(fragmentName: string): Promise<sap.ui.core.Control> {

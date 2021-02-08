@@ -2,7 +2,7 @@ sap.ui.define(
   ["wizard/controller/BaseController", "wizard/utils/formatters"],
   function (
     BaseController: typeof wizard.AppController,
-    Formatters: typeof sap.ui.model.SimpleType
+    Formatters: typeof wizard.Formatters
   ) {
     "use strict";
 
@@ -11,9 +11,11 @@ sap.ui.define(
 
       onInit() {
         // this._generateBankLogin();
-        this._navContainer = this.byId("app");
-        this._wizardContainer = this.byId("bankAccountCreation");
-        this._wizardPage = this.byId("wizardPage");
+        this._navContainer = this.byId("app") as sap.m.NavContainer;
+        this._wizardContainer = this.byId(
+          "bankAccountCreation"
+        ) as sap.m.Wizard;
+        this._wizardPage = this.byId("wizardPage") as sap.f.DynamicPage;
       }
 
       public onComplete(): void {
@@ -22,7 +24,7 @@ sap.ui.define(
       }
 
       public onCompleteStep(): void {
-        var currentStep: number = this.getState("currentStep");
+        const currentStep: number = this.getState("currentStep");
 
         this.changeCurrentStepNumber(currentStep + 1);
         this.checkLastStep();
@@ -33,7 +35,7 @@ sap.ui.define(
       }
 
       public onPrevStep(): void {
-        var prevStep: number = this.getState("currentStep") - 1;
+        const prevStep: number = this.getState("currentStep") - 1;
 
         this.changeCurrentStepNumber(prevStep);
         this.checkLastStep();
@@ -41,17 +43,19 @@ sap.ui.define(
       }
 
       public onEditStep(event: sap.ui.base.Event): void {
-        var stepNumber: number = event.getSource().getCustomData()[0].getKey();
+        const source = event.getSource() as sap.m.Link;
+        const stepNumber: number = +source.getCustomData()[0].getKey();
 
         this.navigateToWizardPage(stepNumber);
       }
 
       public onCancel(event: sap.ui.base.Event): void {
-        this.loadDiscardPopover(event.getSource());
+        const source = event.getSource() as sap.m.Button;
+        this.loadDiscardPopover(source);
       }
 
       private generateBankLogin(): void {
-        var name: string = this.getProperty("Name"),
+        const name: string = this.getProperty("Name"),
           login: string = name + (0 | Math.random());
 
         this.setProperty("Login", login);
@@ -72,7 +76,7 @@ sap.ui.define(
       }
 
       private checkLastStep(): void {
-        var totalSteps: number = this._wizardContainer.getSteps().length,
+        const totalSteps: number = this._wizardContainer.getSteps().length,
           currentStep: number = this.getState("currentStep"),
           isLastStep: boolean = totalSteps === currentStep;
 
@@ -91,7 +95,7 @@ sap.ui.define(
       }
 
       private navigateToWizardStep(stepNumber: number) {
-        var wizardStep = this._wizardContainer.getSteps()[stepNumber];
+        const wizardStep = this._wizardContainer.getSteps()[stepNumber];
 
         this._wizardContainer.goToStep(wizardStep, true);
 
