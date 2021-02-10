@@ -36,7 +36,7 @@ sap.ui.define(
        * @return {string | sap.ui.model.ValidateException} - If the given number is correct, a parsed value will be returned. otherwise sap.ui.model.ValidateException will be thrown.
        * @private
        */
-      parseValue(value: string): string {
+      parseValue(value: string): string | never {
         var numbersOnly = value.replace(/\s/g, ""),
           isNumber = Number.isInteger(+numbersOnly);
 

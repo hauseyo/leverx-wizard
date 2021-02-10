@@ -19,7 +19,9 @@ sap.ui.define(
       }
 
       public onComplete(): void {
-        this._navContainer.to("reviewPage", "slide", {}, {});
+        const reviewPageId = this.byId("reviewPage").getId();
+
+        this._navContainer.to(reviewPageId, "slide", {}, {});
         this.changeCurrentStepNumber(0);
       }
 
@@ -43,14 +45,14 @@ sap.ui.define(
       }
 
       public onEditStep(event: sap.ui.base.Event): void {
-        const source = event.getSource() as sap.m.Link;
-        const stepNumber: number = +source.getCustomData()[0].getKey();
+        const source = event.getSource() as wizard.CommonControl;
+        const stepNumber: number = +source.data("step");
 
         this.navigateToWizardPage(stepNumber);
       }
 
       public onCancel(event: sap.ui.base.Event): void {
-        const source = event.getSource() as sap.m.Button;
+        const source = event.getSource() as wizard.CommonControl;
         this.loadDiscardPopover(source);
       }
 
@@ -61,7 +63,7 @@ sap.ui.define(
         this.setProperty("Login", login);
       }
 
-      private loadDiscardPopover(source: sap.m.Button): void {
+      private loadDiscardPopover(source: sap.ui.base.EventProvider): void {
         if (!this._discardPopover) {
           this.loadFragment("DiscardConfirmation").then(
             function (popover: sap.m.Popover) {

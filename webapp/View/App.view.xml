@@ -1,9 +1,9 @@
-<mvc:XMLView xmlns:core="sap.ui.core"
-  xmlns:f="sap.f"
+<mvc:XMLView xmlns:f="sap.f"
   xmlns:form="sap.ui.layout.form"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m" displayBlock="true" controllerName="wizard.controller.App"
-  xmlns:bank="wizard.controls">
+  xmlns:bank="wizard.controls"
+  xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
   <Shell>
     <NavContainer id="app">
       <f:DynamicPage id="wizardPage" showFooter="true">
@@ -48,7 +48,6 @@
                 <Label text="{i18n>BankAccountLogin}"/>
                 <Input enabled="false" value="{path: '/Login'}"/>
                 <Label text="{i18n>CreditCardNum}"/>
-                <!-- <Input value="{path: '/CardNumber'}"/> -->
                 <bank:CreditCardField value="{/CardNumber}" />
                 <Label text="{i18n>BankAccountNewPW}"/>
                 <Input type="Password" value="{path: '/NewPassword'}"/>
@@ -78,11 +77,8 @@
           <Label text="{i18n>UserWorkExp}"/>
           <Text text="{/WorkExperience}"/>
 
-          <Link text="{i18n>Edit}" press="onEditStep">
-            <customData>
-              <core:CustomData key="0"/>
-            </customData>
-          </Link>
+          <Link text="{i18n>Edit}" press="onEditStep" data:step="0"/>
+
         </form:SimpleForm>
 
         <form:SimpleForm title="{i18n>PersonalInfo}">
@@ -95,11 +91,8 @@
           <Label text="{i18n>PlaceOfIssue}"/>
           <Text text="{/PlaceIssue}"/>
 
-          <Link text="{i18n>Edit}" press="onEditStep">
-            <customData>
-              <core:CustomData key="1"/>
-            </customData>
-          </Link>
+          <Link text="{i18n>Edit}" press="onEditStep" data:step="1"/>
+
         </form:SimpleForm>
 
         <form:SimpleForm title="{i18n>BankAccountInfo}">
@@ -110,11 +103,8 @@
             path: '/CardNumber',
             formatter: '.formatters.maskCreditCardNumber'
             }"/>
-          <Link text="{i18n>Edit}" press="onEditStep">
-            <customData>
-              <core:CustomData key="2"/>
-            </customData>
-          </Link>
+          <Link text="{i18n>Edit}" press="onEditStep" data:step="2"/>
+
         </form:SimpleForm>
         <footer>
           <OverflowToolbar>

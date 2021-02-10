@@ -34,4 +34,8 @@ declare namespace wizard {
      */
     public setType(type: sap.ui.model.SimpleType): void;
   }
+
+  export class CommonControl extends sap.ui.base.EventProvider {
+    public data(dataName: string): string;
+  }
 }

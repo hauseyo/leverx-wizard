@@ -19,7 +19,7 @@ sap.ui.define(
         super("wizard.Controller.BaseController");
       }
 
-      public getModel() {
+      public getModel(): sap.ui.model.json.JSONModel {
         return this.getView().getModel() as sap.ui.model.json.JSONModel;
       }
 
