@@ -19,33 +19,35 @@ sap.ui.define(
         super("wizard.Controller.BaseController");
       }
 
-      public getModel(): sap.ui.model.json.JSONModel {
-        return this.getView().getModel();
+      public getModel() {
+        return this.getView().getModel() as sap.ui.model.json.JSONModel;
       }
 
-      public getProperty(path: string): any {
+      public getProperty(path: string): unknown {
         return this.getModel().getProperty("/" + path);
       }
 
-      public setProperty(path: string, value: any): void {
+      public setProperty(path: string, value: unknown): void {
         this.getModel().setProperty("/" + path, value);
       }
 
-      public getState(path: string): any {
+      public getState(path: string): unknown {
         return this.getView()
           .getModel("states")
           .getProperty("/" + path);
       }
 
-      public setState(path: string, value: any): void {
-        const stateModel: sap.ui.model.json.JSONModel = this.getView().getModel(
+      public setState(path: string, value: unknown): void {
+        const stateModel = this.getView().getModel(
           "states"
-        );
+        ) as sap.ui.model.json.JSONModel;
 
         stateModel.setProperty("/" + path, value);
       }
 
-      public loadFragment(fragmentName: string): Promise<sap.ui.core.Control> {
+      public loadFragment(
+        fragmentName: string
+      ): Promise<typeof sap.ui.core.Control> {
         return Fragment.load({
           id: this.getView().getId(),
           name: "wizard.fragments." + fragmentName,

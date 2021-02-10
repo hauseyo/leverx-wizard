@@ -4,7 +4,7 @@ declare namespace wizard {
 
     public getProperty(path: string): any;
 
-    public setProperty(path: string, value: any): void | never;
+    // public setProperty(path: string, value: any): void | Error;
 
     public getState(path: string): any;
 
@@ -27,9 +27,11 @@ declare namespace wizard {
     public maskCreditCardNumber(cardNumber: string): string;
   }
 
-  enum CARD_TYPES {
-    VISA = "VISA",
-    MASTERCARD = "MasterCard",
-    None = ""
+  export class BindingClass extends sap.ui.model.Binding {
+    /**
+     * Method to set the data type.
+     * @param  {sap.ui.model.SimpleType} type
+     */
+    public setType(type: sap.ui.model.SimpleType): void;
   }
 }

@@ -110,7 +110,7 @@
             path: '/CardNumber',
             formatter: '.formatters.maskCreditCardNumber'
             }"/>
-          <Link text="{i18n>ChangePW}" press="onEditStep">
+          <Link text="{i18n>Edit}" press="onEditStep">
             <customData>
               <core:CustomData key="2"/>
             </customData>

@@ -19,7 +19,7 @@ sap.ui.define(
       }
 
       public onComplete(): void {
-        this._navContainer.to(this.byId("reviewPage"), "slide", {}, {});
+        this._navContainer.to("reviewPage", "slide", {}, {});
         this.changeCurrentStepNumber(0);
       }
 

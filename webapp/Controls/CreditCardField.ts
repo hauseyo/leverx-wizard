@@ -60,12 +60,12 @@ sap.ui.define(
        * @return {string} Returns credit card type from CARD_TYPES object.
        * @private
        */
-      private getCardType(cardNumber: string): wizard.CARD_TYPES {
+      private getCardType(cardNumber: string): CARD_TYPES {
         const numbersOnly = cardNumber.replace(/\s/g, "");
         let regex = new RegExp("^4");
 
         if (numbersOnly.match(regex)) {
-          return wizard.CARD_TYPES.VISA;
+          return CARD_TYPES.VISA;
         }
 
         regex = new RegExp("^5[1-5]");
@@ -82,8 +82,9 @@ sap.ui.define(
        */
       private setInputType(): void {
         const inputType = new CreditCard();
+        const inputBinding = this.getBinding("value") as wizard.BindingClass;
 
-        this.getBinding("value").setType(inputType);
+        inputBinding.setType(inputType);
       }
     }
 
