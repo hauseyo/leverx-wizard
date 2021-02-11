@@ -17,6 +17,14 @@ sap.ui.define(
       None = ""
     }
 
+    interface Binding extends sap.ui.model.Binding {
+      /**
+       * Method to set the data type.
+       * @param  {sap.ui.model.SimpleType} type
+       */
+      setType(type: sap.ui.model.SimpleType): void;
+    }
+
     /**
      * Extended sap.m.Input class.
      * Credit card type is indeed in this control.
@@ -82,7 +90,7 @@ sap.ui.define(
        */
       private setInputType(): void {
         const inputType = new CreditCard();
-        const inputBinding = this.getBinding("value") as wizard.BindingClass;
+        const inputBinding = this.getBinding("value") as Binding;
 
         inputBinding.setType(inputType);
       }

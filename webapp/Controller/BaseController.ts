@@ -7,19 +7,7 @@ sap.ui.define(
     "use strict";
 
     class BaseController extends Controller {
-      constructor() {
-        const controllerClass = Controller.extend(
-          "wizard.Controller.BaseController",
-          {}
-        );
-
-        BaseController.prototype.getMetadata =
-          controllerClass.prototype.getMetadata;
-
-        super("wizard.Controller.BaseController");
-      }
-
-      public getModel(): sap.ui.model.json.JSONModel {
+      public getModel() {
         return this.getView().getModel() as sap.ui.model.json.JSONModel;
       }
 
@@ -31,7 +19,7 @@ sap.ui.define(
         this.getModel().setProperty("/" + path, value);
       }
 
-      public getState(path: string): unknown {
+      public getState(path: string) {
         return this.getView()
           .getModel("states")
           .getProperty("/" + path);

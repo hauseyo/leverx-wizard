@@ -1,8 +1,8 @@
 sap.ui.define(
   ["wizard/controller/BaseController", "wizard/utils/formatters"],
   function (
-    BaseController: typeof wizard.AppController,
-    Formatters: typeof wizard.Formatters
+    BaseController: typeof Controller.App,
+    Formatters: typeof Utils.Formatters
   ) {
     "use strict";
 
@@ -45,19 +45,19 @@ sap.ui.define(
       }
 
       public onEditStep(event: sap.ui.base.Event): void {
-        const source = event.getSource() as wizard.CommonControl;
+        const source = event.getSource() as EventProvider.Source;
         const stepNumber: number = +source.data("step");
 
         this.navigateToWizardPage(stepNumber);
       }
 
       public onCancel(event: sap.ui.base.Event): void {
-        const source = event.getSource() as wizard.CommonControl;
+        const source = event.getSource() as EventProvider.Source;
         this.loadDiscardPopover(source);
       }
 
       private generateBankLogin(): void {
-        const name: string = this.getProperty("Name"),
+        const name = this.getProperty("Name") as string,
           login: string = name + (0 | Math.random());
 
         this.setProperty("Login", login);

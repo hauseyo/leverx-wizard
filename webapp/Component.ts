@@ -5,7 +5,7 @@ sap.ui.define(
 
     class Component extends UIComponent {
       constructor(settings: object) {
-        const uiComponentClass = UIComponent.extend("wizard.Component", {
+        const uiComponentClass = new UIComponent.extend("wizard.Component", {
           metadata: {
             manifest: "json"
           }
