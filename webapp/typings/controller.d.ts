@@ -15,7 +15,9 @@ declare namespace Controller {
       T extends Model.view.State,
       K extends keyof Model.view.State
     >(path: K, value: T[K]): void;
-
+    /**
+     * Method to load fragment.
+     */
     public loadFragment(
       fragmentName: string
     ): Promise<typeof sap.ui.core.Control>;

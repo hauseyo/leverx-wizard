@@ -3,6 +3,7 @@
     "module": "none",
     "target": "es5",
     "skipLibCheck": true,
+    "sourceMap": true,
     "noEmit": false,
     "downlevelIteration": true,
     "checkJs": false,

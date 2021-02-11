@@ -45,14 +45,14 @@ sap.ui.define(
       }
 
       public onEditStep(event: sap.ui.base.Event): void {
-        const source = event.getSource() as EventProvider.Source;
+        const source = event.getSource() as EventProvider.SourceControl;
         const stepNumber: number = +source.data("step");
 
         this.navigateToWizardPage(stepNumber);
       }
 
       public onCancel(event: sap.ui.base.Event): void {
-        const source = event.getSource() as EventProvider.Source;
+        const source = event.getSource() as EventProvider.SourceControl;
         this.loadDiscardPopover(source);
       }
 
